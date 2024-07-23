@@ -1,0 +1,346 @@
+<style>
+        :root {
+            --primary-color: #1DB954;
+            --secondary-color: #191414;
+            --text-color: #FFFFFF;
+            --background-color: #121212;
+            --hover-color: #282828;
+        }
+        
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', 'Arial', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+        
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        
+        .sidebar {
+            width: 240px;
+            background-color: var(--secondary-color);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+        
+        .nav-menu {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+        
+        .nav-menu li {
+            margin-bottom: 15px;
+        }
+        
+        .nav-menu a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-menu i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        .main-content {
+            flex-grow: 1;
+            padding: 30px;
+            overflow-y: auto;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .card {
+            background-color: var(--hover-color);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: background-color 0.3s, transform 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .card:hover {
+            background-color: #3E3E3E;
+            transform: translateY(-5px);
+        }
+        
+        .card-image {
+            width: 160px;
+            height: 160px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .card-description {
+            font-size: 14px;
+            color: #B3B3B3;
+        }
+        
+        .user-profile {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            background-color: var(--hover-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        
+        .user-profile img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .user-profile span {
+            font-size: 14px;
+        }
+        
+        .search-container {
+            margin-bottom: 30px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            background-color: var(--hover-color);
+            color: var(--text-color);
+            font-size: 16px;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--primary-color);
+        }
+        
+        .player {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--secondary-color);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .player-controls {
+            display: flex;
+            align-items: center;
+        }
+        
+        .player-controls button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 28px;
+            margin: 0 15px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .player-controls button:hover {
+            color: var(--primary-color);
+        }
+        
+        .player-progress {
+            flex-grow: 1;
+            height: 4px;
+            background-color: var(--hover-color);
+            margin: 0 20px;
+            position: relative;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+        
+        .player-progress-bar {
+            height: 100%;
+            background-color: var(--primary-color);
+            width: 0;
+            border-radius: 2px;
+            position: relative;
+        }
+        
+        .player-progress-bar::after {
+            content: '';
+            position: absolute;
+            right: -5px;
+            top: -3px;
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: none;
+        }
+        
+        .player-progress:hover .player-progress-bar::after {
+            display: block;
+        }
+        
+        .player-time {
+            font-size: 12px;
+            color: #B3B3B3;
+        }
+        
+        .auth-buttons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        
+        .auth-buttons button {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        
+        .auth-form {
+            background-color: var(--secondary-color);
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+            margin: 0 auto;
+        }
+        
+        .auth-form h2 {
+            margin-bottom: 20px;
+        }
+        
+        .auth-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: var(--hover-color);
+            color: var(--text-color);
+        }
+        
+        .auth-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .like-button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .like-button:hover {
+            color: var(--primary-color);
+        }
+        
+        .like-button.active {
+            color: var(--primary-color);
+        }
+        
+        .playlist-tracks {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .playlist-track {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .playlist-track:hover {
+            background-color: var(--hover-color);
+        }
+        
+        .playlist-track img {
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            margin-right: 10px;
+            object-fit: cover;
+        }
+        
+        .playlist-track-info {
+            flex-grow: 1;
+        }
+        
+        .playlist-track-title {
+            font-weight: bold;
+        }
+        
+        .playlist-track-artist {
+            font-size: 12px;
+            color: #B3B3B3;
+        }
+        
+        .playlist-track-duration {
+            font-size: 12px;
+            color: #B3B3B3;
+            margin-right: 10px;
+        }
+        
+        .playlist-track-like {
+            margin-left: 10px;
+        }
+    </style>
